@@ -3,7 +3,9 @@
  */
 package client;
 
-import server.Candidate;
+import java.util.ArrayList;
+
+import candidate.Candidate;
 
 /**
  * @author chance
@@ -17,9 +19,9 @@ public class ClientApp {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Candidate candidate = new Candidate(" ", 0, "", "");
+		ArrayList<Candidate> candidateList = new ArrayList<Candidate>();
 		
-		new ClientFrame(candidate);
+		new ClientFrame(candidateList);
 	}
 
 }

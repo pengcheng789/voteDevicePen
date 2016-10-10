@@ -8,6 +8,10 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+
+import candidate.Candidate;
+
 
 /**
  * @author chance
@@ -31,13 +35,13 @@ public class DataSocket {
 		}
 	}
 	
-	public void service(Candidate candidate){
+	public void service(ArrayList<Candidate> candidateList){
 		
 			ObjectOutputStream os = null;
 			try {
 				
 				os = new ObjectOutputStream(socket.getOutputStream());
-				os.writeObject(candidate);
+				os.writeObject(candidateList);
 				os.flush();
 				os.close();
 				System.out.println("传送完成");

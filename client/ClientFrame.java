@@ -3,16 +3,19 @@
  */
 package client;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
-import server.Candidate;
+import candidate.Candidate;
 
 /**
  * @author chance
@@ -26,18 +29,30 @@ public class ClientFrame extends JFrame{
 		return this.jpanel;
 	}
 	
-	public ClientFrame(Candidate candidate){
+	public ClientFrame(ArrayList<Candidate> candidateList){
 		super("voteDevice Client");
 		
 		this.jpanel = new JPanel();
-		add(mainPanel(jpanel, candidate));
+		jpanel.setLayout(new GridLayout(1, 4));
+		JButton reflushButton = new JButton("刷新");
+		reflushButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new ControlSocket().reflushAction();
+			}
+		});
+		jpanel.add(reflushButton);
 		
-		DataSocket dSocket = new DataSocket(this, jpanel, candidate);
+		add(jpanel);
+		
+		DataSocket dSocket = new DataSocket(this, jpanel, candidateList);
 		Thread dSocketThread = new Thread(dSocket);
 		dSocketThread.start();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(300, 500);
+		setSize(1300, 500);
+		setResizable(false);
 		setVisible(true);
 		setLocation(600,300);
 	}
@@ -63,16 +78,7 @@ public class ClientFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new ControlSocket().voteAction();
-			}
-		});
-		
-		JButton reflushButton = new JButton("刷新");
-		reflushButton.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				new ControlSocket().reflushAction();
+				new ControlSocket().voteAction(candidate.getId());
 			}
 		});
 		
@@ -89,7 +95,9 @@ public class ClientFrame extends JFrame{
 		jpanel.add(countLabel);
 		jpanel.add(countLabelContent);
 		jpanel.add(voteButton);
-		jpanel.add(reflushButton);
+		
+		jpanel.setSize(300, 500);
+		jpanel.setBorder(new LineBorder(Color.BLUE));
 		
 		return jpanel;
 	}

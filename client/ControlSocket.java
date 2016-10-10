@@ -50,8 +50,8 @@ public class ControlSocket{
 		}
 	}
 	
-	public void voteAction(){
-		byte[] packet = {1};
+	public void voteAction(int id){
+		byte[] packet = {1, (byte)id};
 		OutputStream os = null;
 		try {
 			os = socket.getOutputStream();

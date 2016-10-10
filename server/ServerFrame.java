@@ -3,14 +3,20 @@
  */
 package server;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+
+import candidate.Candidate;
+
 
 /**
  * @author chance
@@ -24,17 +30,27 @@ public class ServerFrame extends JFrame {
 		return this.jpanel;
 	}
 	
-	public ServerFrame(Candidate candidate){
+	public ServerFrame(ArrayList<Candidate> candidateList){
 		super("voteDevice Server");
-		this.jpanel = new JPanel();
 		
-		add(mainPanel(jpanel, candidate));
-		ControlSocket cSocket = new ControlSocket(this, jpanel, candidate);
+		this.jpanel = new JPanel();
+		jpanel.setLayout(new GridLayout(1, 4));
+		for(Candidate candidate : candidateList){
+			jpanel.add(mainPanel(new JPanel(), candidate));
+		}
+		JButton addButton = new JButton("增加候选人");
+		addButton.setEnabled(false);
+		jpanel.add(addButton);
+		
+		add(jpanel);
+		
+		ControlSocket cSocket = new ControlSocket(this, jpanel, candidateList);
 		Thread cSocketThread = new Thread(cSocket);
 		cSocketThread.start();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(300, 500);
+		setSize(1300, 500);
+		setResizable(false);
 		setVisible(true);
 		setLocation(600,300);
 	}
@@ -71,6 +87,9 @@ public class ServerFrame extends JFrame {
 			}
 		});
 		
+		JButton editButton = new JButton("编辑");
+		editButton.setEnabled(false);
+		
 		jpanel.add(headImgLabel);
 		jpanel.add(headImgContent);
 		jpanel.add(nameLabel);
@@ -83,7 +102,16 @@ public class ServerFrame extends JFrame {
 		jpanel.add(detailLabelContent);
 		jpanel.add(countLabel);
 		jpanel.add(countLabelContent);
-		jpanel.add(toZeroButton);
+		
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridLayout(1, 2));
+		buttonPanel.add(toZeroButton);
+		buttonPanel.add(editButton);
+		
+		jpanel.add(buttonPanel);
+		
+		//jpanel.setSize(300, 500);
+		jpanel.setBorder(new LineBorder(Color.BLUE));
 		
 		return jpanel;
 	}

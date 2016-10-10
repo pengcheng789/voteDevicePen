@@ -3,6 +3,11 @@
  */
 package server;
 
+import java.util.ArrayList;
+
+import candidate.Candidate;
+
+
 /**
  * @author chance
  *
@@ -14,10 +19,19 @@ public class ServerApp {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String detail = "美国民主党籍政治家，也是第44任美国总统，于2008年初次当选，并于2012年成功连任。";
-		Candidate obama = new Candidate("Obama", 55, "男", detail);
+		String obamaDetail = "美国民主党籍政治家。";
+		Candidate obama = new Candidate(0, "Obama", 55, "男", obamaDetail);
+		String xiDetail = "中国共产党第五代领导人";
+		Candidate xi = new Candidate(1, "习大大", 63, "男", xiDetail);
+		String jiangDetail = "第三代中央领导集体的核心。";
+		Candidate jiang = new Candidate(2, "长者", 90, "男", jiangDetail);
 	
-		new ServerFrame(obama);
+		ArrayList<Candidate> candidateList = new ArrayList<Candidate>();
+		candidateList.add(obama);
+		candidateList.add(xi);
+		candidateList.add(jiang);
+		
+		new ServerFrame(candidateList);
 	}
 
 }
