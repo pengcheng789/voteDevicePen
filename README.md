@@ -3,9 +3,9 @@
 
 ## 说明
 课堂小作业。。。
-###默认使用9999和10000两个端口。
-###9999端口传输指令，由服务端的ControlSocket类和客户端的ControlSocket类实现
-###10000端口传输数据，由服务端的DataSocket类和客户端的DataSocket类实现
+####默认使用9999和10000两个端口。
+####9999端口传输指令，由服务端的ControlSocket类和客户端的ControlSocket类实现
+####10000端口传输数据，由服务端的DataSocket类和客户端的DataSocket类实现
 
 ## 结构
 
