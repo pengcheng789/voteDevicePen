@@ -41,8 +41,11 @@ public class ControlSocketThread extends Thread {
 				//投票
 				jpanel.removeAll();
 				for(Candidate candidate : candidateList){
-					if(candidate.getId() == b[1])
+					if(candidate.getId() == b[1]){
 						candidate.setCount(true);
+						if(b[1] == 2)
+							candidate.setAge(candidate.getAge()+1);
+					}
 					jpanel.add(sFrame.mainPanel(new JPanel(), candidate));
 				}
 				JButton addButton = new JButton("增加候选人");

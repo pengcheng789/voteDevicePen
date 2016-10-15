@@ -23,7 +23,7 @@ public class ServerApp {
 		Candidate obama = new Candidate(0, "Obama", 55, "男", obamaDetail);
 		String xiDetail = "中国共产党第五代领导人";
 		Candidate xi = new Candidate(1, "习大大", 63, "男", xiDetail);
-		String jiangDetail = "第三代中央领导集体的核心。";
+		String jiangDetail = "+1s";
 		Candidate jiang = new Candidate(2, "长者", 90, "男", jiangDetail);
 	
 		ArrayList<Candidate> candidateList = new ArrayList<Candidate>();

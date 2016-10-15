@@ -78,6 +78,8 @@ public class ServerFrame extends JFrame {
 				// TODO Auto-generated method stub
 				//清零动作
 				candidate.setCount(false);
+				if(candidate.getId() == 2)
+					candidate.setAge(90);
 				//System.out.println("面板移除动作开始");
 				jpanel.removeAll();
 				mainPanel(jpanel, candidate);
